@@ -22,53 +22,37 @@
 # https://github.com/aubsec/cta.git
 # https://twitter.com/aubsec
 # https://aubsec.github.io
-
-# Imports
-
-
 import datetime
-import hashlib
-import os
+#import hashlib
+#import os
 import sys
-import tempfile
-import urllib.request
-import zipfile
-from lib.startup import cta_argument_parser, cta_config, cta_init
+#import tempfile
+#import urllib.request
+#import zipfile
+
+from lib.cta_startup import cta_argument_parser, cta_config, cta_init
+from lib.cta_exception import cta_exception_handler
 
 
-
-# function exception_handler():
-# Collects error codes and prints to screen
-def exception_handler(exceptValue, exceptFunction):
-    sys.stderr.write("[!] An exception has occured in " + str(exceptFunction) + "\n")
-    sys.stderr.write("[!] " + str(exceptValue) + "\n")
-    exit(1)
-
-
-# function Main():
 def cta_main():
-
-
 # Sets default exception values.
     exceptFunction = "main()"
     exceptValue = None
-
 # Executes primary purpose of application.
     try:
         args = cta_argument_parser()
         cta_init(args)
+        exceptFunction = cta_config(args)
 # Instantiates object based on class NSRLDownload() and calls method GetNSRL().
 #        nsrl = NsrlLookup()
 #        
 #        exceptValue,exceptFunction = nsrl.getNsrl()
-
 # If program completed sucessfully, write sucess message to stderr and exit with 0.
         sys.stderr.write("[+] Program completed sucessfully.\n")
         exit(0)
-
 # If execution fails, collects errors and passes them to the ExeceptionHandler() function.
     except Exception as exceptValue:
-        exception_handler(exceptValue, exceptFunction)
+        cta_exception_handler(exceptValue, exceptFunction)
 
 if __name__=="__main__":
     cta_main()
