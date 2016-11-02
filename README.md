@@ -1,10 +1,6 @@
 # cta.py
 ###https://github.com/aubsec/cta.git
 
-The purpose of this Python application is to take a CSV or individual hash value
-as input, perform a search against the NSRL and VirusTotal for the input, and output
-to stdout in CSV format data about the hashes discovered. 
-
 ## Usage
 
 cta.py requries at least one argument of -s.
