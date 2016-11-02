@@ -52,16 +52,17 @@ def cta_config(args):
         config = configparser.ConfigParser()
 
         config.read(args.config)
-        
-        for i in config.sections():
-            print(config.sections)
+        print(config.sections())
+        for section in config.sections():
+            print(section)
+            for key in config[section]: 
+                print(key)
+                print(config[section][key])
+
 
     
     except Exception as exceptValue:
         cta_exception_handler(exceptValue, exceptFunction)
-
-
-
 
 def cta_init(args):
     exceptFunction = "cta_init()"

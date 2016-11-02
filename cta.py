@@ -42,7 +42,7 @@ def cta_main():
     try:
         args = cta_argument_parser()
         cta_init(args)
-        exceptFunction = cta_config(args)
+        cta_config(args)
 # Instantiates object based on class NSRLDownload() and calls method GetNSRL().
 #        nsrl = NsrlLookup()
 #        
