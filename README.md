@@ -39,8 +39,8 @@ Matthew Aubert
 
 ## License
 
-cta.py is a tool for doing automated seraches of MD5 hash values
-from various threat sources.
+cta.py is a tool for doing automated seraches of string values from various 
+threat intelligence sources.
 
 Copyright (C) 2016 Matthew Aubert
 
