@@ -64,10 +64,9 @@ def cta_config(searchString, args):
 # These following statements build the name of the method being called based
 # on the name of the section in the configuration file. 
                 methodName = eval(("cta_" + section + "_init").lower())
-                try:
-                    methodName(searchString, apiKey)
-                except:
-                    pass
+                methodName(searchString, apiKey)
+#                except:
+#                    pass
             else:
                 continue
         return
