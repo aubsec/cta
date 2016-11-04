@@ -7,7 +7,7 @@ from lib.cta_exception import cta_exception_handler
 
 # Souce Imports.  Add new sources to the following list. 
 from lib.cta_threatgrid import cta_threatgrid_init
-#from lib.cta_virustotal import cta_virustotal_init
+from lib.cta_virustotal import cta_virustotal_init
 
 
 # Parses arguements.
@@ -65,8 +65,6 @@ def cta_config(searchString, args):
 # on the name of the section in the configuration file. 
                 methodName = eval(("cta_" + section + "_init").lower())
                 methodName(searchString, apiKey)
-#                except:
-#                    pass
             else:
                 continue
         return

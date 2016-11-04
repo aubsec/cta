@@ -15,11 +15,9 @@ def cta_threatgrid_init(searchString, apiKey):
 	jsonResponse = dict()
 	try:
 		builtQuery = (URL + "api_key=" + apiKey + "&q=" + searchString)
-
-		responseQuery = urllib.request.urlopen(builtQuery)
-		responseData = responseQuery.read()
-		responseEncoding = responseData.info().get_content_charset('utf-8')
-		jsonResponse = json.loads(responseData.decode(responseEncoding))
+		responseQuery = urllib.request.urlopen(builtQuery).read()
+		jsonResponse = json.loads(responseQuery.decode('utf-8'))
+		sys.stderr.write(__name__ + "\n")
 		print(jsonResponse)
 		return
 	except Exception as exceptValue:

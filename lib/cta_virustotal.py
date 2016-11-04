@@ -15,17 +15,13 @@ def cta_virustotal_init(searchString, apiKey):
 	jsonResponse = dict()
 	try:
 		builtQuery = (URL + "apikey=" + apiKey + "&resource=" + searchString)
-		sys.stdout.write(builtQuery)
-		try:
-			responseQuery = urllib.request.urlopen(builtQuery)
-			responseEncoding = responseQuery.info().get_content_charset('utf-8')
-			jsonResponse = json.loads(data.decode(responseEncoding))
-			print(jsonResponse)
-		except:
-			sys.stderr.write("[!] Unable to complete VirusTotal API request.\n")
+		responseQuery = urllib.request.urlopen(builtQuery).read()
+		jsonResponse = json.loads(responseQuery.decode('utf-8'))
+		sys.stderr.write(__name__ + "\n")
+		print(jsonResponse)
 		return
 	except Exception as exceptValue:
-		cta_exception_hander(exceptValue, __name__)
+		cta_exception_handler(exceptValue, __name__)
 
 
 if __name__=="__main__":
