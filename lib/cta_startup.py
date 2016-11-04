@@ -3,12 +3,15 @@ import argparse
 from argparse import RawTextHelpFormatter
 import configparser
 import sys
-
 from lib.cta_exception import cta_exception_handler
+
+# Souce Imports.  Add new sources to the following list. 
+from lib.cta_threatgrid import cta_threatgrid_init
+from lib.cta_testcall import cta_testcall_init
 
 # Parses arguements.
 def cta_argument_parser():
-    exceptFunction = "cta_argument_parser"
+
     try:
         parser = argparse.ArgumentParser(description="""
 Cybert Threat Aggregator
@@ -40,34 +43,39 @@ search.""", required=True)
         return(args)
 
     except Exception as exceptValue:
-        return(exceptValue, exceptFunction)
+        cta_exception_handler(exceptValue, __name__)
 
 # Goal is to parse a configuration file
 # Currently is not working right. 
-def cta_config(args):
-    exceptFunction = "cta_argument_parser"
+def cta_config(searchString, args):
+
     try:
-#        with open(args.config, "r") as configFile:
-#            for line in configFile:
-#                sys.stderr.write(line + "\n")
         config = configparser.ConfigParser()
         config.read(args.config)
-        print(config.sections())
+# For every section in the config file, test if it is Enabled, if so call it's
+# respective function. 
+# To add new functionalitiy, modify the config file, add the new class to the
+# /lib/ folder, and add a line below to call the new function.
         for section in config.sections():
-            print(section)
-            for key in config[section]: 
-                print(key)
-                print(config[section][key])
+            if config[section]["Enabled"] == "True":
+                apiKey = config[section]["API"]
+                methodName = eval(("cta_" + section + "_init").lower())
+                try:
+                    methodName(searchString, apiKey)
+                except:
+                    pass
+        return
                 
     except Exception as exceptValue:
-        cta_exception_handler(exceptValue, exceptFunction)
+        cta_exception_handler(exceptValue, __name__)
 
 def cta_init(args):
-    exceptFunction = "cta_init()"
+
     try:
         with open(args.string) as fileName:
-            for line in fileName:
-                sys.stderr.write(line)
+            for searchString in fileName:
+                #sys.stderr.write(line)
+                cta_config(searchString, args)
         return
 
     except:

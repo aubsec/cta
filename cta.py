@@ -35,24 +35,15 @@ from lib.cta_exception import cta_exception_handler
 
 
 def cta_main():
-# Sets default exception values.
-    exceptFunction = "main()"
-    exceptValue = None
-# Executes primary purpose of application.
     try:
         args = cta_argument_parser()
         cta_init(args)
-        cta_config(args)
-# Instantiates object based on class NSRLDownload() and calls method GetNSRL().
-#        nsrl = NsrlLookup()
-#        
-#        exceptValue,exceptFunction = nsrl.getNsrl()
-# If program completed sucessfully, write sucess message to stderr and exit with 0.
+        
         sys.stderr.write("[+] Program completed sucessfully.\n")
         exit(0)
-# If execution fails, collects errors and passes them to the ExeceptionHandler() function.
+
     except Exception as exceptValue:
-        cta_exception_handler(exceptValue, exceptFunction)
+        cta_exception_handler(exceptValue, __name__)
 
 if __name__=="__main__":
     cta_main()
