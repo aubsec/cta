@@ -3,6 +3,10 @@
 
 ## Usage
 
+Before Use:
+Edit the file "cta_config.conf".  Add your personal API keys to the configuration
+and set the appropriate sections to "Enabled = True".
+
 cta.py requries at least one argument of -s.
 
 |Argument   |Description|
