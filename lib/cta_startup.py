@@ -12,6 +12,7 @@ def cta_argument_parser():
     try:
         parser = argparse.ArgumentParser(description="""
 Cybert Threat Aggregator
+
 cta.py takes as input a text file of hashes or strings,  or a single 
 hash value or string and performs a searh of various sources.  The purpose of 
 this application is to identify of the strings are known by threat intelligence
@@ -50,7 +51,6 @@ def cta_config(args):
 #            for line in configFile:
 #                sys.stderr.write(line + "\n")
         config = configparser.ConfigParser()
-
         config.read(args.config)
         print(config.sections())
         for section in config.sections():
@@ -58,9 +58,7 @@ def cta_config(args):
             for key in config[section]: 
                 print(key)
                 print(config[section][key])
-
-
-    
+                
     except Exception as exceptValue:
         cta_exception_handler(exceptValue, exceptFunction)
 
