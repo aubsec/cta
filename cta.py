@@ -36,12 +36,12 @@ from lib.cta_exception import cta_exception_handler
 
 def cta_main():
     try:
+# Calls cta_argument_parser from cta_startup.py and returns value to args.
         args = cta_argument_parser()
+# Calls cta_init from cta_startup.py. 
         cta_init(args)
-        
         sys.stderr.write("[+] Program completed sucessfully.\n")
         exit(0)
-
     except Exception as exceptValue:
         cta_exception_handler(exceptValue, __name__)
 

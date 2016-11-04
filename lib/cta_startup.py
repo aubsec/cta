@@ -7,7 +7,8 @@ from lib.cta_exception import cta_exception_handler
 
 # Souce Imports.  Add new sources to the following list. 
 from lib.cta_threatgrid import cta_threatgrid_init
-from lib.cta_testcall import cta_testcall_init
+#from lib.cta_virustotal import cta_virustotal_init
+
 
 # Parses arguements.
 def cta_argument_parser():
@@ -55,22 +56,27 @@ def cta_config(searchString, args):
 # For every section in the config file, test if it is Enabled, if so call it's
 # respective function. 
 # To add new functionalitiy, modify the config file, add the new class to the
-# /lib/ folder, and add a line below to call the new function.
+# /lib/ folder, and add the appropriate import to the top.
         for section in config.sections():
+# Verifies that the section is enabled. 
             if config[section]["Enabled"] == "True":
                 apiKey = config[section]["API"]
+# These following statements build the name of the method being called based
+# on the name of the section in the configuration file. 
                 methodName = eval(("cta_" + section + "_init").lower())
                 try:
                     methodName(searchString, apiKey)
                 except:
                     pass
+            else:
+                continue
         return
                 
     except Exception as exceptValue:
         cta_exception_handler(exceptValue, __name__)
 
+# Simple method that is called by cta.py to begin execution of the program.
 def cta_init(args):
-
     try:
         with open(args.string) as fileName:
             for searchString in fileName:
@@ -81,3 +87,7 @@ def cta_init(args):
     except:
         print(args.string)
         return
+
+if __name__=="__main__":
+    sys.stderr.write("[!] Please execute program from cta.py.\n")
+    exit(0)
