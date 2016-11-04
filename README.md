@@ -3,7 +3,8 @@
 
 ## Usage
 
-Before Use:
+####Before Use:
+
 Edit the file "cta_config.conf".  Add your personal API keys to the configuration
 and set the appropriate sections to "Enabled = True".
 
