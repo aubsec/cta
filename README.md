@@ -4,7 +4,7 @@
 ## Requirements
 1.  Python 3
 2.  Modify "cta_config.conf" with API keys.
-3.  Set appropriate sections in "cta_config.conf" to Enable = True.
+3.  Set appropriate sections in "cta_config.conf" to Enabled = True.
 
 ## Usage
 
