@@ -1,12 +1,12 @@
 # cta.py
 ###https://github.com/aubsec/cta.git
 
+## Requirements
+1.  Python 3
+2.  Modify "cta_config.conf" with API keys.
+3.  Set appropriate sections in "cta_config.conf" to Enabled = True.
+
 ## Usage
-
-####Before Use:
-
-Edit the file "cta_config.conf".  Add your personal API keys to the configuration
-and set the appropriate sections to "Enabled = True".
 
 cta.py requries at least one argument of -s.
 
