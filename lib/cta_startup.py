@@ -82,7 +82,8 @@ def cta_init(args):
         return
 
     except:
-        print(args.string)
+        searchString = args.string
+        cta_config(searchString, args)
         return
 
 if __name__=="__main__":

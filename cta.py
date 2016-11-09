@@ -23,12 +23,7 @@
 # https://twitter.com/aubsec
 # https://aubsec.github.io
 import datetime
-#import hashlib
-#import os
 import sys
-#import tempfile
-#import urllib.request
-#import zipfile
 
 from lib.cta_startup import cta_argument_parser, cta_config, cta_init
 from lib.cta_exception import cta_exception_handler

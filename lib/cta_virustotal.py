@@ -16,9 +16,15 @@ def cta_virustotal_init(searchString, apiKey):
 	try:
 		builtQuery = (URL + "apikey=" + apiKey + "&resource=" + searchString)
 		responseQuery = urllib.request.urlopen(builtQuery).read()
-		jsonResponse = json.loads(responseQuery.decode('utf-8'))
-		sys.stderr.write(__name__ + "\n")
-		print(jsonResponse)
+		jsonResponse = json.loads(responseQuery.decode("utf-8"))
+
+		print("\nVirusTotal Search")
+		print("Permalink: " + jsonResponse["permalink"])
+		print("SHA256 Hash: " + jsonResponse["sha256"])
+		print("Detection Ratio: " 
+			+ str(jsonResponse["positives"]) 
+			+ "/" 
+			+ str(jsonResponse["total"]))
 		return
 	except Exception as exceptValue:
 		cta_exception_handler(exceptValue, __name__)
