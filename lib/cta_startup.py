@@ -5,7 +5,7 @@ import configparser
 import sys
 from lib.cta_exception import cta_exception_handler
 
-# Souce Imports.  Add new sources to the following list. 
+# Intelligence Souce Imports.  Add new sources to the following list. 
 from lib.cta_threatgrid import cta_threatgrid_init
 from lib.cta_virustotal import cta_virustotal_init
 
