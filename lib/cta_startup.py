@@ -37,7 +37,8 @@ https://aubsec.github.io""", formatter_class=RawTextHelpFormatter)
         parser.add_argument("-s", "--string", help="""
 Required. Specify a single hash value, string, or file of strings to 
 search.""", required=True)
-        parser.add_argument("-c", "--config", help="Specify Config File.", default="cta_config.conf", required=False)
+        parser.add_argument("-c", "--config", help="Specify Config File.", 
+            default="cta_config.conf", required=False)
         args = parser.parse_args()
 # These are here for debugging purposes.
         sys.stderr.write("[+] String being parsed: " + str(args.string) + "\n")
