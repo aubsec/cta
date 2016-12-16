@@ -24,15 +24,16 @@ Example 1:  cta.py -s 0d1ef429ed4a31753e5905e5356ba94d
 Example 2:  cta.py -s file.txt
 
 ## ToDo
-- [ ] Parse arguments.
-- [ ] Parse configuration file.
-- [ ] Execute code based on options in configuration file.
-- [ ] User input of single MD5 Hash
-- [ ] User input of MD5 hash list
-- [ ] ThreatGrid search using user defined API key.
+- [X] Parse arguments.
+- [X] Parse configuration file.
+- [X] Execute code based on options in configuration file.
+- [X] User input of single MD5 Hash
+- [X] User input of MD5 hash list
+- [X] ThreatGrid search using user defined API key.
 - [ ] CSV formatted output to stdout.
 - [ ] Fully commented.
-- [ ] Error handling.
+- [X] Error handling.
+- [ ] Configure cta_threatgrid.py so it does not print bad URIs.
 
 ## Credits
 
