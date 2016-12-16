@@ -5,4 +5,4 @@ import sys
 def cta_exception_handler(exceptValue, exceptFunction):
     sys.stderr.write("[!] An exception has occured in " + str(exceptFunction) + "\n")
     sys.stderr.write("[!] " + str(exceptValue) + "\n")
-    exit(1)
+    return

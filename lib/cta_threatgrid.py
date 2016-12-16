@@ -21,9 +21,9 @@ def cta_threatgrid_init(searchString, apiKey):
 # The following two lines are for debugging. 
         #sys.stderr.write(__name__ + "\n")
         #print(json.dumps(jsonResponse, sort_keys=True, indent=4))
-
-        print("\nThreatGrid Search")
-        print("Permalink: https://panacea.threatgrid.com/mask/#/search/samples?q=" 
+        if jsonResponse["data"]["total"] != 0:
+            print("\nThreatGrid Search")
+            print("Permalink: https://panacea.threatgrid.com/mask/#/search/samples?q=" 
             + searchString + "&term=freeform&_k=b80gmg")
         for item in jsonResponse["data"]["items"]:
             print("Filename: " + str(item["item"]["filename"]))
@@ -40,6 +40,7 @@ def cta_threatgrid_init(searchString, apiKey):
         return
     except Exception as exceptValue:
         cta_exception_handler(exceptValue, __name__)
+        return
 
 
 if __name__=="__main__":
