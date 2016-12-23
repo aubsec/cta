@@ -16,6 +16,7 @@ def cta_virustotal_init(searchString, apiKey):
     jsonResponse = dict()
     #searchString = searchString.replace("\n","")
     try:
+        print("VirusTotal Search: " + searchString)
         sys.stderr.write("[*] Waiting 15 seconds for VirusTotal. \n")
         time.sleep(15)
 
@@ -26,7 +27,7 @@ def cta_virustotal_init(searchString, apiKey):
 # The following two lines are for debugging. 
         #sys.stderr.write(__name__ + "\n")
         #sys.stderr.write(json.dumps(jsonResponse, sort_keys=True, indent=4))
-        print("VirusTotal Search: " + searchString)
+
         print("Permalink: " + str(jsonResponse["permalink"]))
         print("SHA256 Hash: " + str(jsonResponse["sha256"]))
         print("Detection Ratio: " 

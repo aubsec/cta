@@ -15,6 +15,7 @@ def cta_threatgrid_init(searchString, apiKey):
     jsonResponse = dict()
 #    sys.stderr.write("[!] Testing!\n")
     try:
+        print("ThreatGrid Search: " + searchString)
         #searchString = searchString.replace("\n","")
         count = 0
         builtQuery = (URL + "api_key=" + apiKey + "&q=" + searchString)
@@ -26,7 +27,7 @@ def cta_threatgrid_init(searchString, apiKey):
         #sys.stderr.write(json.dumps(jsonResponse, sort_keys=True, indent=4))
 
         if jsonResponse["data"]["total"] != 0:
-            print("ThreatGrid Search: " + searchString)
+
             print("Permalink: https://panacea.threatgrid.com/mask/#/search/samples?q=" 
             + searchString + "&term=freeform&_k=b80gmg")
             for item in jsonResponse["data"]["items"]:
