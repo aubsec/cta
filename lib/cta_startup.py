@@ -3,6 +3,8 @@ import argparse
 from argparse import RawTextHelpFormatter
 import configparser
 import sys
+import subprocess
+from threading import Thread
 from lib.cta_exception import cta_exception_handler
 
 # Intelligence Souce Imports.  Add new sources to the following list. 
@@ -58,6 +60,7 @@ def cta_config(searchString, args):
 # respective function. 
 # To add new functionalitiy, modify the config file, add the new class to the
 # /lib/ folder, and add the appropriate import to the top.
+        print("\n\nSearching For: " + searchString)
         for section in config.sections():
 # Verifies that the section is enabled. 
             if config[section]["Enabled"] == "True":
@@ -65,7 +68,11 @@ def cta_config(searchString, args):
 # These following statements build the name of the method being called based
 # on the name of the section in the configuration file. 
                 methodName = eval(("cta_" + section + "_init").lower())
-                methodName(searchString, apiKey)
+                searchString = searchString.replace("\n","")
+                thread1 = Thread(target=methodName, args=(str(searchString),str(apiKey)))
+                thread1.start()
+                thread1.join()
+                #methodName(searchString, apiKey)
             else:
                 continue
         return
@@ -78,7 +85,8 @@ def cta_init(args):
     try:
         with open(args.string) as fileName:
             for searchString in fileName:
-                #sys.stderr.write(line)
+                
+                #sys.stderr.write(searchString)
                 cta_config(searchString, args)
         return
 
