@@ -85,7 +85,6 @@ def cta_init(args):
     try:
         with open(args.string) as fileName:
             for searchString in fileName:
-                
                 #sys.stderr.write(searchString)
                 cta_config(searchString, args)
         return
