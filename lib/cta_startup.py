@@ -10,6 +10,7 @@ from lib.cta_exception import cta_exception_handler
 # Intelligence Souce Imports.  Add new sources to the following list. 
 from lib.cta_threatgrid import cta_threatgrid_init
 from lib.cta_virustotal import cta_virustotal_init
+from lib.cta_umbrella import cta_umbrella_init
 
 
 # Parses arguements.
@@ -60,7 +61,8 @@ def cta_config(searchString, args):
 # respective function. 
 # To add new functionalitiy, modify the config file, add the new class to the
 # /lib/ folder, and add the appropriate import to the top.
-        print("\n\nSearching For: " + searchString)
+        searchString = searchString.replace("\n","")
+        print("\nSearching For: " + searchString)
         for section in config.sections():
 # Verifies that the section is enabled. 
             if config[section]["Enabled"] == "True":
@@ -69,10 +71,10 @@ def cta_config(searchString, args):
 # on the name of the section in the configuration file. 
                 methodName = eval(("cta_" + section + "_init").lower())
                 #sys.stderr.write(str(methodName))
-                searchString = searchString.replace("\n","")
-                thread1 = Thread(target=methodName, args=(str(searchString),str(apiKey)))
-                thread1.start()
-                thread1.join()
+                #searchString = searchString.replace("\n","")
+                #thread1 = Thread(target=methodName, args=(str(searchString),str(apiKey)))
+                #thread1.start()
+                #thread1.join()
                 methodName(searchString, apiKey)
             else:
                 continue
@@ -86,7 +88,7 @@ def cta_init(args):
     try:
         with open(args.string) as fileName:
             for searchString in fileName:
-                sys.stderr.write(searchString)
+                #sys.stderr.write(searchString)
                 cta_config(searchString, args)
         return
 

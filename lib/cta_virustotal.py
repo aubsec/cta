@@ -10,11 +10,30 @@ except:
     pass
 
 # API = 
-
-
-def cta_virustotal_init(searchString, apiKey):
+def cta_virustotal_domain(searchString, apiKey):
     jsonResponse = dict()
     #searchString = searchString.replace("\n","")
+    URL = "https://www.virustotal.com/vtapi/v2/domain/report?"
+    try:
+        builtQuery = (URL + "apikey=" + apiKey + "&domain=" + searchString)
+        sys.stderr.write(builtQuery + "\n")
+        responseQuery = urllib.request.urlopen(builtQuery).read()
+        jsonResponse = json.loads(responseQuery.decode("utf-8"))
+# The following two lines are for debugging. 
+        #sys.stderr.write(__name__ + "\n")
+        #sys.stderr.write(json.dumps(jsonResponse, sort_keys=True, indent=4))
+        #print("VirusTotal Search: " + searchString)
+        #print("Alexa rank: " + str(jsonResponse["Alexa rank"]))
+        print("Category: " + str(jsonResponse["categories"]))
+        print("Resolutions: " + str(jsonResponse["resolutions"]))
+
+    except Exception as exceptValue:
+        cta_exception_handler(exceptValue, __name__)
+        
+    return
+
+def cta_virustotal_file(searchString, apiKey):
+    jsonResponse = dict()
     URL = "https://www.virustotal.com/vtapi/v2/file/report?"
     try:
         sys.stderr.write("[*] Waiting 15 seconds for VirusTotal. \n")
@@ -36,32 +55,23 @@ def cta_virustotal_init(searchString, apiKey):
             + str(jsonResponse["total"]))
 
     except Exception as exceptValue:
-        # If the string is not a file, attempt to search for the domain.
-        cta_virustotal_domain(searchString, apiKey)
-        #cta_exception_handler(exceptValue, __name__)
-        return
+        cta_exception_handler(exceptValue, __name__)
+    return
 
-def cta_virustotal_domain(searchString, apiKey):
-    jsonResponse = dict()
-    #searchString = searchString.replace("\n","")
-    URL = "https://www.virustotal.com/vtapi/v2/domain/report?"
+def cta_virustotal_init(searchString, apiKey):
+        #searchString = searchString.replace("\n","")
     try:
-        builtQuery = (URL + "apikey=" + apiKey + "&domain=" + searchString)
-        sys.stderr.write(builtQuery + "\n")
-        responseQuery = urllib.request.urlopen(builtQuery).read()
-        jsonResponse = json.loads(responseQuery.decode("utf-8"))
-# The following two lines are for debugging. 
-        #sys.stderr.write(__name__ + "\n")
-        #sys.stderr.write(json.dumps(jsonResponse, sort_keys=True, indent=4))
-        #print("VirusTotal Search: " + searchString)
-        #print("Alexa rank: " + str(jsonResponse["Alexa rank"]))
-        print("Category: " + str(jsonResponse["categories"]))
-        print("Resolutions: " + str(jsonResponse["resolutions"]))
+        builtQuery = ("http://" + str(searchString))
+        responseQuery = urllib.request.urlopen(builtQuery).getcode()
+        sys.stderr.write(responseQuery)
+        if responseQuery == 200:
+            cta_virustotal_domain(searchString, apiKey)
+        else:
+            cta_virustotal_file(searchString, apiKey)
 
     except Exception as exceptValue:
         cta_exception_handler(exceptValue, __name__)
-        return
-
+    
     return
 
 if __name__=="__main__":

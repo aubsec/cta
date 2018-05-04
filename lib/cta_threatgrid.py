@@ -37,7 +37,7 @@ def cta_threatgrid_init(searchString, apiKey):
                 print("Threat Score: " + str(item["item"]["analysis"]["threat_score"]))
                 print()
                 count += 1
-                if count == 5:
+                if count == 1:
                     break
                 else:
                     continue
