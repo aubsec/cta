@@ -6,11 +6,13 @@ import sys
 import subprocess
 from threading import Thread
 from lib.cta_exception import cta_exception_handler
+from lib.cta_writer import cta_writer_init
 
 # Intelligence Souce Imports.  Add new sources to the following list. 
 from lib.cta_threatgrid import cta_threatgrid_init
 from lib.cta_virustotal import cta_virustotal_init
 from lib.cta_umbrella import cta_umbrella_init
+
 
 
 # Parses arguements.
@@ -62,13 +64,17 @@ def cta_config(searchString, args):
 # To add new functionalitiy, modify the config file, add the new class to the
 # /lib/ folder, and add the appropriate import to the top.
         searchString = searchString.replace("\n","")
-        print("\nSearching For: " + searchString)
+        sys.stderr.write("\nSearching For: " + searchString)
         for section in config.sections():
 # Verifies that the section is enabled. 
             if config[section]["Enabled"] == "True":
                 apiKey = config[section]["API"]
 # These following statements build the name of the method being called based
 # on the name of the section in the configuration file. 
+                #if config[section] == "threatgrid":
+                #    header = ["Search String", "URL", "Filename", "Submitted Timestamp", "SHA256", "Threat Score", ",,"]
+                #    cta_writer_init(header)
+
                 methodName = eval(("cta_" + section + "_init").lower())
                 #sys.stderr.write(str(methodName))
                 #searchString = searchString.replace("\n","")
